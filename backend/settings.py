@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': '5432'
+        'NAME': "facerecognitiondb",
+        'USER': "facerecognition",
+        'PASSWORD': "facerecognition.1234",
+        'HOST': "107.180.91.147",
+        'PORT': '5432',
     }
 }
 
