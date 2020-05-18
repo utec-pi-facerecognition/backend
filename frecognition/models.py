@@ -40,4 +40,4 @@ class Admin(models.Model):
 
 class Embedding(models.Model):
 	codigo=models.IntegerField(primary_key=True)
-	atributos= ArrayField(models.DecimalField(max_digits=18, decimal_places=18))
+	atributos= ArrayField(models.DecimalField(max_digits=22, decimal_places=18))
