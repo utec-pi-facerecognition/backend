@@ -4,8 +4,8 @@ import psycopg2
 # Create your models here.
 
 connection = psycopg2.connect(user = "facerecognition",password = "facerecognition.1234",host = "107.180.91.147",
-                                  port = "5432",
-                                  database = "facerecognitiondb")
+                                port = "5432",
+                                database = "facerecognitiondb")
 cursor= connection.cursor()
 
 
