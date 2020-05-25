@@ -14,8 +14,8 @@ class Migration(migrations.Migration):
             name='Asistencia',
             fields=[
                 ('codigo', models.CharField(max_length=30, primary_key=True, serialize=False)),
-                ('nombre_profesor', models.CharField(max_length=50)),
-                ('nombre_clase', models.CharField(max_length=50)),
+                ('codigo_profesor', models.ForeignKey(on_delete=models.CASCADE, to="frecognition.Profesor")),
+                ('codigo_clase', models.ForeignKey(on_delete=models.CASCADE, to="frecognition.Clases")),
                 ('fecha', models.DateField()),
             ],
         ),
