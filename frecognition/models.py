@@ -37,6 +37,13 @@ class Admin(models.Model):
 	password=models.CharField(max_length=30)
 	role=models.CharField(max_length=30)
 
+class Asistencia(models.Model):
+	codigo=models.CharField(max_length=30,primary_key=True)
+	nombre_profesor=models.CharField(max_length=50)
+	nombre_clase=models.CharField(max_length=50)
+	fecha=models.DateField()
+
+
 
 class Embedding(models.Model):
 	codigo=models.IntegerField(primary_key=True)
