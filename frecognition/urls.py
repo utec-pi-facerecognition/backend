@@ -10,5 +10,6 @@ router.register('image', ImageViewSet)
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('rollcall', views.rollcall, name='assistance'),
     path('api/', include(router.urls), name='api')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

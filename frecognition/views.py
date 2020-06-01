@@ -1,3 +1,4 @@
+from django.views import View
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
@@ -14,3 +15,9 @@ from .serializer import ImageSerializer
 
 def index(request):
     return HttpResponse("Hello world")
+
+class rollcall(View):
+    def post(self, request):
+        # TODO
+        data = {'jorge' : 5}
+        return JsonResponse(data)
