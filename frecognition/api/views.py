@@ -72,7 +72,9 @@ class rollcall(APIView):
 		alumnos = []
 		embeddings = request.data['candidatos']
 		for embedding in embeddings:
-			alumnos.append(inline_knn(embedding).nombre)
+			alumno = inline_knn(embedding)
+			if (alumno is not None):
+				alumnos.append(alumno.nombre)
 
 		print(alumnos)
 		return JsonResponse({"alumnos" : alumnos})
