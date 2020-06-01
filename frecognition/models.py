@@ -12,7 +12,6 @@ cursor= connection.cursor()
 class Image(models.Model):
     image = models.ImageField(upload_to="images")
 
-
 class Clases(models.Model):
 	codigo=models.CharField(max_length=30,primary_key=True)
 	nombre=models.CharField(max_length=30)
