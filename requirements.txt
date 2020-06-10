@@ -3,5 +3,5 @@ django-cors-headers==3.2.1
 djangorestframework==3.11.0
 Markdown==3.2.1
 python-dotenv==0.13.0
-psycopg2
-pillow
+psycopg2==2.8.5
+Pillow==7.1.2
