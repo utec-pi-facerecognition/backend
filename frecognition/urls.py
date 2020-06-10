@@ -7,8 +7,10 @@ from rest_framework import routers
 
 from frecognition.api.views import ClaseGetAPIView
 from frecognition.api.views import ClaseCreateAPIView
+from frecognition.api.views import ClaseDetail
 from frecognition.api.views import AlumnoGetAPIView
 from frecognition.api.views import AlumnoCreateAPIView
+from frecognition.api.views import AlumnoDetail
 from frecognition.api.views import EmbeddingGetAPIView
 from frecognition.api.views import EmbeddingCreateAPIView
 
@@ -22,8 +24,10 @@ urlpatterns = [
     path('api/', include(router.urls), name='api'),
     path('api/clases/get', ClaseGetAPIView.as_view(), name='clases-get'),
     path('api/clases/create', ClaseCreateAPIView.as_view(), name='clases-create'),
+    path('api/clases/<int:pk>/', ClaseDetail.as_view()),
     path('api/alumno/get', AlumnoGetAPIView.as_view(), name='alumno-get'),
     path('api/alumno/create', AlumnoCreateAPIView.as_view(), name='alumno-create'),
+    path('api/alumno/<int:pk>/', AlumnoDetail.as_view()),
     path('api/embedding/get', EmbeddingGetAPIView.as_view(), name='embedding-get'),
     path('api/embedding/create', EmbeddingCreateAPIView.as_view(), name='embedding-create'),
     path('api/rollcall/', rollcall.as_view(), name='rollcall')

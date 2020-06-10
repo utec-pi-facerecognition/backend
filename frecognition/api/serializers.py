@@ -8,12 +8,15 @@ class ClasesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clases
         fields = ["codigo", "nombre", "seccion"]
+    def __str__(self):
+        return self.nombre
     
 class AlumnoSerializer(serializers.ModelSerializer):
+    clases = serializers.PrimaryKeyRelatedField(many=True, queryset=Clases.objects.all())
     class Meta:
         model = Alumno
-        fields = ["codigo", "nombre", "foto"]
-    
+        fields = ["codigo", "nombre", "foto", "clases"]
+
 class EmbeddingSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Embedding

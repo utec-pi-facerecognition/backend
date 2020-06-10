@@ -26,6 +26,10 @@ class ClaseCreateAPIView(generics.CreateAPIView):
 	permission_classes = []
 	authentication_classes = []
 
+class ClaseDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Clases.objects.all()
+    serializer_class = ClasesSerializer
+
 class AlumnoGetAPIView(generics.ListAPIView):
 	queryset = Alumno.objects.all()
 	serializer_class = AlumnoSerializer
@@ -37,6 +41,10 @@ class AlumnoCreateAPIView(generics.CreateAPIView):
 	serializer_class = AlumnoSerializer
 	permission_classes = []
 	authentication_classes = []
+
+class AlumnoDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Alumno.objects.all()
+    serializer_class = AlumnoSerializer
 
 class EmbeddingGetAPIView(generics.ListAPIView):
 	queryset = Embedding.objects.all()
