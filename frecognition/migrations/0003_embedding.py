@@ -3,7 +3,6 @@
 import django.contrib.postgres.fields
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -16,6 +15,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('codigo', models.IntegerField(primary_key=True, serialize=False)),
                 ('atributos', django.contrib.postgres.fields.ArrayField(base_field=models.DecimalField(decimal_places=18, max_digits=18), size=None)),
+                ('codigo_alumno', models.ForeignKey(on_delete=models.CASCADE, to="frecognition.Alumno")),
             ],
         ),
     ]

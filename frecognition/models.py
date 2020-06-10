@@ -4,14 +4,13 @@ import psycopg2
 # Create your models here.
 
 connection = psycopg2.connect(user = "facerecognition",password = "facerecognition.1234",host = "107.180.91.147",
-                                  port = "5432",
-                                  database = "facerecognitiondb")
+                                port = "5432",
+                                database = "facerecognitiondb")
 cursor= connection.cursor()
 
 
 class Image(models.Model):
     image = models.ImageField(upload_to="images")
-
 
 class Clases(models.Model):
 	codigo=models.CharField(max_length=30,primary_key=True)
@@ -23,7 +22,6 @@ class Alumno(models.Model):
 	nombre=models.CharField(max_length=30)
 	foto=models.ImageField()
 	clases = models.ManyToManyField(Clases, verbose_name="clases")
-
 
 class Profesor(models.Model):
 	codigo=models.IntegerField(primary_key=True)
@@ -39,12 +37,11 @@ class Admin(models.Model):
 
 class Asistencia(models.Model):
 	codigo=models.CharField(max_length=30,primary_key=True)
-	nombre_profesor=models.CharField(max_length=50)
-	nombre_clase=models.CharField(max_length=50)
+	codigo_profesor=models.ForeignKey(Profesor, on_delete=models.CASCADE)
+	codigo_clase=models.ForeignKey(Clases, on_delete=models.CASCADE)
 	fecha=models.DateField()
-
-
 
 class Embedding(models.Model):
 	codigo=models.IntegerField(primary_key=True)
+	codigo_alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
 	atributos= ArrayField(models.DecimalField(max_digits=22, decimal_places=18))
