@@ -12,22 +12,22 @@ cursor= connection.cursor()
 class Image(models.Model):
     image = models.ImageField(upload_to="images")
 
-class Clases(models.Model):
-	codigo=models.CharField(max_length=30,primary_key=True)
-	nombre=models.CharField(max_length=30)
-	seccion=models.IntegerField()
-
-class Alumno(models.Model):
-	codigo=models.IntegerField(primary_key=True)
-	nombre=models.CharField(max_length=30)
-	foto=models.ImageField()
-	clases = models.ManyToManyField(Clases, verbose_name="clases")
-
 class Profesor(models.Model):
 	codigo=models.IntegerField(primary_key=True)
 	nombre=models.CharField(max_length=30)
 	ususario=models.CharField(max_length=30)
 	password=models.CharField(max_length=30)
+
+class Clases(models.Model):
+	codigo=models.CharField(max_length=30,primary_key=True)
+	nombre=models.CharField(max_length=30)
+	seccion=models.IntegerField()
+	profesores = models.ManyToManyField(Profesor, verbose_name="profesores")
+
+class Alumno(models.Model):
+	codigo=models.IntegerField(primary_key=True)
+	nombre=models.CharField(max_length=30)
+	foto=models.ImageField()
 	clases = models.ManyToManyField(Clases, verbose_name="clases")
 
 class Admin(models.Model):
