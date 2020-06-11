@@ -1,13 +1,15 @@
 from rest_framework import serializers
 
 from frecognition.models import Clases
+from frecognition.models import Profesor
 from frecognition.models import Alumno
 from frecognition.models import Embedding
 
 class ClasesSerializer(serializers.ModelSerializer):
+    profesores = serializers.PrimaryKeyRelatedField(many=True, queryset=Profesor.objects.all())
     class Meta:
         model = Clases
-        fields = ["codigo", "nombre", "seccion"]
+        fields = '__all__'
     def __str__(self):
         return self.nombre
     
@@ -15,7 +17,12 @@ class AlumnoSerializer(serializers.ModelSerializer):
     clases = serializers.PrimaryKeyRelatedField(many=True, queryset=Clases.objects.all())
     class Meta:
         model = Alumno
-        fields = ["codigo", "nombre", "foto", "clases"]
+        fields = '__all__'
+
+class ProfesorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profesor
+        fields = '__all__'
 
 class EmbeddingSerializer(serializers.ModelSerializer):
 	class Meta:

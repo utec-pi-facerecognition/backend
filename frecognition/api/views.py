@@ -7,10 +7,12 @@ import math
 
 from frecognition.models import Clases
 from frecognition.models import Alumno
+from frecognition.models import Profesor
 from frecognition.models import Embedding
 
 from .serializers import ClasesSerializer
 from .serializers import AlumnoSerializer
+from .serializers import ProfesorSerializer
 from .serializers import EmbeddingSerializer
 from .serializers import RollcallSerializer
 
@@ -43,8 +45,20 @@ class AlumnoCreateAPIView(generics.CreateAPIView):
 	authentication_classes = []
 
 class AlumnoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Alumno.objects.all()
-    serializer_class = AlumnoSerializer
+	queryset = Alumno.objects.all()
+	serializer_class = AlumnoSerializer
+
+class ProfesorGetAPIView(generics.ListAPIView):
+	queryset = Profesor.objects.all()
+	serializer_class = ProfesorSerializer
+
+class ProfesorCreateAPIView(generics.CreateAPIView):
+	queryset = Profesor.objects.all()
+	serializer_class = ProfesorSerializer
+
+class ProfesorDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Profesor.objects.all()
+	serializer_class = ProfesorSerializer
 
 class EmbeddingGetAPIView(generics.ListAPIView):
 	queryset = Embedding.objects.all()
