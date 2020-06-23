@@ -15,6 +15,7 @@ from frecognition.models import Asistencia
 from .serializers import ClasesSerializer
 from .serializers import AlumnoSerializer
 from .serializers import ProfesorSerializer
+from .serializers import AsistenciaSerializer
 from .serializers import EmbeddingSerializer
 from .serializers import RollcallSerializer
 
@@ -62,6 +63,18 @@ class ProfesorDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Profesor.objects.all()
 	serializer_class = ProfesorSerializer
 
+
+class AsistenciaGetAPIView(generics.ListAPIView):
+	queryset = Asistencia.objects.all()
+	serializer_class = AsistenciaSerializer
+
+class AsistenciaCreateAPIView(generics.CreateAPIView):
+	queryset = Asistencia.objects.all()
+	serializer_class = AsistenciaSerializer
+
+class AsistenciaDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Asistencia.objects.all()
+	serializer_class = AsistenciaSerializer
 class EmbeddingGetAPIView(generics.ListAPIView):
 	queryset = Embedding.objects.all()
 	serializer_class = EmbeddingSerializer
@@ -80,7 +93,7 @@ class rollcall(APIView):
 	permission_classes = (permissions.AllowAny,)
 
 	def post(self, request):
-		clase = Clases.objects.filter(codigo=request.data['course'])
+		clase = Clases.objects.filter(codigo=request.data['course'])[0]
 		today = date.today()
 		def inline_knn(alumno_vec):
 			for candidato in Embedding.objects.all():
@@ -100,9 +113,9 @@ class rollcall(APIView):
 		for embedding in embeddings:
 			alumno = inline_knn(embedding)
 			if (alumno is not None):
-				asistencia = Asistencia(clase.codigo+today+alumno.codigo)
+				asistencia = Asistencia(codigo = str(clase.codigo)+str(today)+str(alumno.codigo), codigo_alumno = alumno, codigo_clase = clase, fecha = today)
 				asistencia.save()
 				alumnos.append(alumno.nombre)
-			print(alumno)
+			print(asistencia)
 		print(alumnos)
 		return JsonResponse({"alumnos" : alumnos})
