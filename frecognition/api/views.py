@@ -4,11 +4,13 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework import authentication, permissions
 import math
+from datetime import date
 
 from frecognition.models import Clases
 from frecognition.models import Alumno
 from frecognition.models import Profesor
 from frecognition.models import Embedding
+from frecognition.models import Asistencia
 
 from .serializers import ClasesSerializer
 from .serializers import AlumnoSerializer
@@ -78,6 +80,8 @@ class rollcall(APIView):
 	permission_classes = (permissions.AllowAny,)
 
 	def post(self, request):
+		clase = Clases.objects.filter(codigo=request.data['course'])
+		today = date.today()
 		def inline_knn(alumno_vec):
 			for candidato in Embedding.objects.all():
 				candidato_vec = candidato.atributos
@@ -96,7 +100,9 @@ class rollcall(APIView):
 		for embedding in embeddings:
 			alumno = inline_knn(embedding)
 			if (alumno is not None):
+				asistencia = Asistencia(clase.codigo+today+alumno.codigo)
+				asistencia.save()
 				alumnos.append(alumno.nombre)
-
+			print(alumno)
 		print(alumnos)
 		return JsonResponse({"alumnos" : alumnos})
