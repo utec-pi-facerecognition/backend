@@ -91,6 +91,18 @@ class rollcall(APIView):
 	serializer_class = RollcallSerializer
 	authentication_classes = []
 	permission_classes = (permissions.AllowAny,)
+	def get(self, request):
+		clase = Clases.objects.filter(codigo=request.data['course'])[0]
+		today = date.today()
+		asistentes = []
+		alumnos = request.data['alumnos']
+		asistencia_en_clase = Asistencia.objects.filter(fecha = today).filter(codigo_clase = clase)
+		for alumno in alumnos:
+			if (asistencia_en_clase.filter(codigo_alumno = alumno)) > 0:
+				asistentes.append(1)
+			else:
+				asistentes.append(0)
+		return JsonResponse({"alumnos" : asistentes})
 
 	def post(self, request):
 		clase = Clases.objects.filter(codigo=request.data['course'])[0]
