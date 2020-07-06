@@ -4,6 +4,7 @@ from frecognition.models import Clases
 from frecognition.models import Profesor
 from frecognition.models import Alumno
 from frecognition.models import Embedding
+from frecognition.models import Asistencia
 
 class ClasesSerializer(serializers.ModelSerializer):
     profesores = serializers.PrimaryKeyRelatedField(many=True, queryset=Profesor.objects.all())
@@ -22,6 +23,12 @@ class AlumnoSerializer(serializers.ModelSerializer):
 class ProfesorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profesor
+        fields = '__all__'
+
+
+class AsistenciaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asistencia
         fields = '__all__'
 
 class EmbeddingSerializer(serializers.ModelSerializer):

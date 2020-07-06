@@ -14,6 +14,9 @@ from frecognition.api.views import AlumnoDetail
 from frecognition.api.views import ProfesorGetAPIView
 from frecognition.api.views import ProfesorCreateAPIView
 from frecognition.api.views import ProfesorDetail
+from frecognition.api.views import AsistenciaGetAPIView
+from frecognition.api.views import AsistenciaCreateAPIView
+from frecognition.api.views import AsistenciaDetail
 from frecognition.api.views import EmbeddingGetAPIView
 from frecognition.api.views import EmbeddingCreateAPIView
 
@@ -34,6 +37,9 @@ urlpatterns = [
     path('api/profesor/get', ProfesorGetAPIView.as_view(), name='profesor-get'),
     path('api/profesor/create', ProfesorCreateAPIView.as_view(), name='profesor-create'),
     path('api/profesor/<int:pk>/', ProfesorDetail.as_view()),
+    path('api/asistencia/get', AsistenciaGetAPIView.as_view(), name='asistencia-get'),
+    path('api/asistencia/create', AsistenciaCreateAPIView.as_view(), name='asistencia-create'),
+    path('api/asistencia/<int:pk>/', AsistenciaDetail.as_view()),
     path('api/embedding/get', EmbeddingGetAPIView.as_view(), name='embedding-get'),
     path('api/embedding/create', EmbeddingCreateAPIView.as_view(), name='embedding-create'),
     path('api/rollcall/', rollcall.as_view(), name='rollcall')

@@ -37,7 +37,7 @@ class Admin(models.Model):
 
 class Asistencia(models.Model):
 	codigo=models.CharField(max_length=30,primary_key=True)
-	codigo_profesor=models.ForeignKey(Profesor, on_delete=models.CASCADE)
+	codigo_alumno=models.ForeignKey(Alumno, on_delete=models.CASCADE, null=True)
 	codigo_clase=models.ForeignKey(Clases, on_delete=models.CASCADE)
 	fecha=models.DateField()
 
