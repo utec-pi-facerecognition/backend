@@ -105,6 +105,8 @@ class rollcall(APIView):
 		return JsonResponse({"alumnos" : asistentes})
 
 	def post(self, request):
+		print("IN POST")
+		print("option", request.data['option'])
 		option = request.data['option'] == 0
 		if option:
 			clase = Clases.objects.filter(codigo=request.data['course'])[0]
@@ -128,9 +130,15 @@ class rollcall(APIView):
 				if (alumno is not None and len(alumno.clases.filter(codigo=clase.codigo)) == 1):
 					asistencia = Asistencia(codigo = str(clase.codigo)+str(today)+str(alumno.codigo), codigo_alumno = alumno, codigo_clase = clase, fecha = today)
 					asistencia.save()
-					alumnos.append(alumno.nombre)
+					alumnos.append(True)
+				else:
+					alumnos.append(False)
+			print("--------------------------------------------------")
+			print(alumnos)
+			print("-------------------------------------------------")
 			return JsonResponse({"alumnos" : alumnos})
 		else:
+			print(request.data)
 			clase = Clases.objects.filter(codigo=request.data['course'])[0]
 			today = date.today()
 			asistentes = []
@@ -139,7 +147,10 @@ class rollcall(APIView):
 			for id in alumnos:
 				# alumno = Alumno.objects.filter(codigo = id)
 				if (asistencia_en_clase.filter(codigo_alumno = id)):
-					asistentes.append(1)
+					asistentes.append(True)
 				else:
-					asistentes.append(0)
+					asistentes.append(False)
+			print("--------------------------------------------------")
+			print(asistentes)
+			print("-------------------------------------------------")
 			return JsonResponse({"alumnos" : asistentes})
