@@ -112,6 +112,8 @@ class rollcall(APIView):
 			clase = Clases.objects.filter(codigo=request.data['course'])[0]
 			today = date.today()
 			def inline_knn(alumno_vec):
+				best = 0.5
+				bestcandidato = None
 				for candidato in Embedding.objects.all():
 					candidato_vec = candidato.atributos
 
@@ -119,10 +121,12 @@ class rollcall(APIView):
 					for i in range(len(alumno_vec)):
 						dist += (float(candidato_vec[i]) - alumno_vec[i]) ** 2
 					dist = math.sqrt(dist)
-
-					epsilon = 0.5
-					if dist < epsilon:
-						return candidato.codigo_alumno
+					if dist < best:
+						best = dist
+						bestcandidato = candidato.codigo_alumno
+				epsilon = 0.5
+				if best < epsilon:
+					return bestcandidato
 			alumnos = []
 			embeddings = request.data['candidatos']
 			for embedding in embeddings:
